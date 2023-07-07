@@ -26,7 +26,7 @@ const player2 = Player("Player 2", "O");
 // 1.2) DisplayController module (an object to control the flow of the game itself)
 // 1.2.1) The module should be responsible for rendering the
 // gameboard onto the webpage, and handling the visual
-// changes when a player makes their move.
+// changes when a player makes their move. n
 
 const DisplayController = (() => {
 
