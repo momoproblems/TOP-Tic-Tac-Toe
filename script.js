@@ -26,23 +26,46 @@ const player2 = Player("Player 2", "O");
 
 
 
-const x_class = 'x'
-const o_class = 'o'
+const X_CLASS = 'x'
+const O_CLASS = 'o'
+const WINNING_COMBINATIONS = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+
+    [0,4,8],
+    [2,4,6]
+]
 const celllements = document.querySelectorAll("[data-cell]");
 const gameBoard = document.getElementById('gameBoard');
 let circleTurn
 
-celllements.forEach( cell => {
-    cell.addEventListener('click', handleClick, {once: true});
-})
+startGame();
+
+function startGame() {
+    circleTurn = false;
+    celllements.forEach( cell => {
+        cell.addEventListener('click', handleClick, {once: true});
+    })
+
+    setBoardHoverClass();
+}
 
 function handleClick(e) {
     const cell = e.target;
-    const currentClass = circleTurn ? o_class : x_class;
+    const currentClass = circleTurn ? O_CLASS : X_CLASS
+;
     console.log('clicked!');
     // Place Mark
     placeMark(cell, currentClass);
     // Check for Win
+    if(checkWin(currentClass)) {
+        console.log('winner!')
+    }
     // Check for Draw
     // Switch Turns
     swapTurns();
@@ -58,12 +81,22 @@ function swapTurns() {
 }
 
 function setBoardHoverClass() {
-    gameBoard.classList.remove(x_class);
-    gameBoard.classList.remove(o_class);
+    gameBoard.classList.remove(X_CLASS
+    );
+    gameBoard.classList.remove(O_CLASS);
     if (circleTurn) {
-        gameBoard.classList.add(o_class);
+        gameBoard.classList.add(O_CLASS);
     }
     else {
-        gameBoard.classList.add(x_class);
+        gameBoard.classList.add(X_CLASS
+        );
     }
+}
+
+function checkWin(currentClass) {
+    return WINNING_COMBINATIONS.some(combination => {
+        return combination.every(index => {
+            return celllements[index].classList.contains(currentClass);
+        })
+    });
 }
