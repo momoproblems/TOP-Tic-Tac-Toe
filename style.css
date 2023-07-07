@@ -80,3 +80,20 @@ table {
     align-items: center;
     font-size: 6rem;
 }
+
+.cell.x::before,
+.cell.x::after {
+    content: '';
+    position: absolute;
+    width: calc(var(--mark-size) * .2);
+    height: var(--mark-size);
+    background-color: #000;
+}
+
+.cell.x::before {
+    transform: rotate(45deg);
+}
+
+.cell.x::after {
+    transform: rotate(-45deg);
+}
