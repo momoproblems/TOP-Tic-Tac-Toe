@@ -42,6 +42,9 @@ const WINNING_COMBINATIONS = [
 ]
 const celllements = document.querySelectorAll("[data-cell]");
 const gameBoard = document.getElementById('gameBoard');
+const winningMessageText = document.querySelector('[data-winning-message-text]');
+const winningMessageDiv = document.querySelector('.winning-message');
+const gameBoardBlur = document.querySelector('.game-board-blur');
 let circleTurn
 
 startGame();
@@ -64,12 +67,23 @@ function handleClick(e) {
     placeMark(cell, currentClass);
     // Check for Win
     if(checkWin(currentClass)) {
+        endGame(false);
         console.log('winner!')
     }
     // Check for Draw
     // Switch Turns
     swapTurns();
     setBoardHoverClass();
+}
+
+function endGame(draw) {
+    if (draw) {
+
+    } else {
+        winningMessageText.innerText = `${circleTurn? "O's": "X's"} Wins!`
+    }
+    winningMessageDiv.classList.add('show');
+    gameBoardBlur.classList.add('show');
 }
 
 function placeMark(cell, currentClass) {
@@ -81,13 +95,11 @@ function swapTurns() {
 }
 
 function setBoardHoverClass() {
-    gameBoard.classList.remove(X_CLASS
-    );
+    gameBoard.classList.remove(X_CLASS);
     gameBoard.classList.remove(O_CLASS);
     if (circleTurn) {
         gameBoard.classList.add(O_CLASS);
-    }
-    else {
+    } else {
         gameBoard.classList.add(X_CLASS
         );
     }
