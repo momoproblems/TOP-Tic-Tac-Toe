@@ -74,6 +74,7 @@ table {
     height: var(--cell-size);
     background-color: #fff;
     border: 1px solid #000;
+    cursor: pointer;
 
     display: flex;
     justify-content: center;
@@ -81,9 +82,16 @@ table {
     font-size: 6rem;
 }
 
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
 /* Mark X */
 .cell.x::before,
-.cell.x::after {
+.cell.x::after,
+.game-board.x .cell:not(.x):not(.o):hover::before,
+.game-board.x .cell:not(.x):not(.o):hover::after {
     content: '';
     position: absolute;
     width: calc(var(--mark-size) * .2);
@@ -91,11 +99,13 @@ table {
     background-color: #000;
 }
 
-.cell.x::before {
+.cell.x::before,
+.game-board.x .cell:not(.x):not(.o):hover::before {
     transform: rotate(45deg);
 }
 
-.cell.x::after {
+.cell.x::after,
+.game-board.x .cell:not(.x):not(.o):hover::after {
     transform: rotate(-45deg);
 }
 
@@ -117,4 +127,10 @@ table {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) * .7);
     background-color: #fff;
+}
+
+/* Hover */
+.game-board.x .cell:not(.x):not(.o):hover::before,
+.game-board.x .cell:not(.x):not(.o):hover::after {
+    background-color: #dfdfdf;
 }
