@@ -35,17 +35,17 @@ celllements.forEach( cell => {
     cell.addEventListener('click', handleClick, {once: true});
 })
 
-function handleClick() {
+function handleClick(e) {
     const cell = e.target;
     const currentClass = circleTurn ? o_class : x_class;
-    
+    console.log('clicked!');
     // Place Mark
     placeMark(cell, currentClass);
 
     // Check for Win
     // Check for Draw
     // Switch Turns
-    console.log('clicked!');
+
 }
 
 function placeMark(cell, currentClass) {
