@@ -47,10 +47,13 @@ table {
 	border-spacing: 0;
 }
 
-/* 
-    MAIN CONTAINER
-*/
+/* UTILS */
+:root {
+    --cell-size: 100px;
+}
 
+
+/*  MAIN CONTAINER */
 .main-container {
     width: 100%;
     height: 100vh;
@@ -67,8 +70,8 @@ table {
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: var(--cell-size);
+    height: var(--cell-size);
     background-color: #fff;
     border: 1px solid #000;
 
