@@ -1,31 +1,3 @@
-// 1) You’re going to store the gameboard as an array inside of 
-// a Gameboard object, so start there! Your players are also 
-// going to be stored in objects, and you’re probably going 
-// to want an object to control the flow of the game itself.
-
-// 1.1) Your main goal here is to have as little global code 
-// as possible. Try tucking everything away inside of a module 
-// or factory. Rule of thumb: if you only ever need ONE of 
-// something (gameBoard, displayController), use a module. 
-// If you need multiples of something (players!), create them 
-// with factories.
-
-const GameBoard = () => {
-    let board = ["", "", "", "", "", "", "", "", ""];
-    return { board };
-};
-
-const Player = (name, marker) => {
-    return { name, marker };
-}
-
-// const gameBoard = GameBoard();
-const player1 = Player("Player 1", "X");
-const player2 = Player("Player 2", "O");
-
-
-
-
 const X_CLASS = 'x'
 const O_CLASS = 'o'
 const WINNING_COMBINATIONS = [
@@ -40,8 +12,9 @@ const WINNING_COMBINATIONS = [
     [0,4,8],
     [2,4,6]
 ]
-const celllements = document.querySelectorAll("[data-cell]");
+const cellElements = document.querySelectorAll("[data-cell]");
 const gameBoard = document.getElementById('gameBoard');
+const restartButton = document.getElementById('restartButton')
 const winningMessageText = document.querySelector('[data-winning-message-text]');
 const winningMessageDiv = document.querySelector('.winning-message');
 const gameBoardBlur = document.querySelector('.game-board-blur');
@@ -49,41 +22,53 @@ let circleTurn
 
 startGame();
 
+restartButton.addEventListener('click', startGame);
+
 function startGame() {
     circleTurn = false;
-    celllements.forEach( cell => {
+    cellElements.forEach( cell => {
         cell.addEventListener('click', handleClick, {once: true});
     })
 
     setBoardHoverClass();
+    winningMessageDiv.classList.remove('show');
+
+    gameBoardBlur.classList.remove('show');
+    cellElements.forEach( cell => {
+        cell.classList.remove(X_CLASS) || cell.classList.remove(O_CLASS);
+    })
 }
 
 function handleClick(e) {
     const cell = e.target;
     const currentClass = circleTurn ? O_CLASS : X_CLASS
 ;
-    console.log('clicked!');
-    // Place Mark
     placeMark(cell, currentClass);
-    // Check for Win
-    if(checkWin(currentClass)) {
+    
+    if (checkWin(currentClass)) {
         endGame(false);
-        console.log('winner!')
+    } else if (isDraw()) {
+        endGame(true);
+    } else {
+        swapTurns();
+        setBoardHoverClass();
     }
-    // Check for Draw
-    // Switch Turns
-    swapTurns();
-    setBoardHoverClass();
 }
 
 function endGame(draw) {
     if (draw) {
-
+        winningMessageText.innerText = 'Draw!';
     } else {
         winningMessageText.innerText = `${circleTurn? "O's": "X's"} Wins!`
     }
     winningMessageDiv.classList.add('show');
     gameBoardBlur.classList.add('show');
+}
+
+function isDraw() {
+    return [...cellElements].every( cell => {
+        return cell.classList.contains(X_CLASS) || cell.classList.contains(O_CLASS)
+    })
 }
 
 function placeMark(cell, currentClass) {
@@ -108,7 +93,7 @@ function setBoardHoverClass() {
 function checkWin(currentClass) {
     return WINNING_COMBINATIONS.some(combination => {
         return combination.every(index => {
-            return celllements[index].classList.contains(currentClass);
+            return cellElements[index].classList.contains(currentClass);
         })
     });
 }
