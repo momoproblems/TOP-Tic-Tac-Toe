@@ -180,6 +180,6 @@ table {
     background-color: #2c7be5;
 }
 
-.wining-message.show {
+.winning-message.show {
     display: flex;
 }
