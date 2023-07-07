@@ -41,13 +41,16 @@ function handleClick(e) {
     console.log('clicked!');
     // Place Mark
     placeMark(cell, currentClass);
-
     // Check for Win
     // Check for Draw
     // Switch Turns
-
+    swapTurns();
 }
 
 function placeMark(cell, currentClass) {
     cell.classList.add(currentClass);
+}
+
+function swapTurns() {
+    circleTurn = !circleTurn
 }
