@@ -50,6 +50,7 @@ table {
 /* UTILS */
 :root {
     --cell-size: 100px;
+    --mark-size: calc(var(--cell-size) * .9);
 }
 
 
@@ -66,7 +67,6 @@ table {
 .game-board {
     display: grid;
     grid-template-columns: repeat(3, auto);
-    grid-template-rows: repeat(3, auto);
 }
 
 .cell {
