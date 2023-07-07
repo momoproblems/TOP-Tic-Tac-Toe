@@ -22,3 +22,13 @@ const Player = (name, marker) => {
 // const gameBoard = GameBoard();
 const player1 = Player("Player 1", "X");
 const player2 = Player("Player 2", "O");
+
+const celllements = document.querySelectorAll("[data-cell]");
+
+celllements.forEach( cell => {
+    cell.addEventListener('click', handleClick, {once: true});
+})
+
+function handleClick() {
+    console.log('clicked!');
+}
