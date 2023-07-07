@@ -29,6 +29,7 @@ const player2 = Player("Player 2", "O");
 const x_class = 'x'
 const o_class = 'o'
 const celllements = document.querySelectorAll("[data-cell]");
+const gameBoard = document.getElementById('gameBoard');
 let circleTurn
 
 celllements.forEach( cell => {
@@ -45,6 +46,7 @@ function handleClick(e) {
     // Check for Draw
     // Switch Turns
     swapTurns();
+    setBoardHoverClass();
 }
 
 function placeMark(cell, currentClass) {
@@ -53,4 +55,15 @@ function placeMark(cell, currentClass) {
 
 function swapTurns() {
     circleTurn = !circleTurn
+}
+
+function setBoardHoverClass() {
+    gameBoard.classList.remove(x_class);
+    gameBoard.classList.remove(o_class);
+    if (circleTurn) {
+        gameBoard.classList.add(o_class);
+    }
+    else {
+        gameBoard.classList.add(x_class);
+    }
 }
