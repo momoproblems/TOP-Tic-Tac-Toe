@@ -23,12 +23,31 @@ const Player = (name, marker) => {
 const player1 = Player("Player 1", "X");
 const player2 = Player("Player 2", "O");
 
+
+
+
+const x_class = 'x'
+const o_class = 'o'
 const celllements = document.querySelectorAll("[data-cell]");
+let circleTurn
 
 celllements.forEach( cell => {
     cell.addEventListener('click', handleClick, {once: true});
 })
 
 function handleClick() {
+    const cell = e.target;
+    const currentClass = circleTurn ? o_class : x_class;
+    
+    // Place Mark
+    placeMark(cell, currentClass);
+
+    // Check for Win
+    // Check for Draw
+    // Switch Turns
     console.log('clicked!');
+}
+
+function placeMark(cell, currentClass) {
+    cell.classList.add(currentClass);
 }

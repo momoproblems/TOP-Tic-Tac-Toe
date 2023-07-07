@@ -159,7 +159,6 @@ table {
     position: absolute;
     width: calc(var(--cell-size) * 3);
     height: calc(var(--cell-size) * 4.5);
-    font-size: 2rem;
 
     display: none;
     flex-direction: column;
