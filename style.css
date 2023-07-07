@@ -53,8 +53,6 @@ table {
     --mark-size: calc(var(--cell-size) * .9);
 }
 
-
-/*******  MAIN CONTAINER ******s*/
 .main-container {
     width: 100%;
     height: 100vh;
@@ -64,6 +62,7 @@ table {
     align-items: center;
 }
 
+/*******  GAME CONTAINER ******s*/
 .game-board {
     display: grid;
     grid-template-columns: repeat(3, auto);
@@ -111,19 +110,23 @@ table {
 
 /* Mark O */
 .cell.o::before,
-.cell.o::after {
+.cell.o::after,
+.game-board.o .cell:not(.x):not(.o):hover::before,
+.game-board.o .cell:not(.x):not(.o):hover::after {
     content: '';
     position: absolute;
     border-radius: 50%;
 }
 
-.cell.o::before {
+.cell.o::before,
+.game-board.o .cell:not(.x):not(.o):hover::before  {
     width: calc(var(--mark-size) * .92);
     height: calc(var(--mark-size) * .92);
     background-color: #000;
 }
 
-.cell.o::after {
+.cell.o::after,
+.game-board.o .cell:not(.x):not(.o):hover::after  {
     width: calc(var(--mark-size) * .7);
     height: calc(var(--mark-size) * .7);
     background-color: #fff;
@@ -131,6 +134,7 @@ table {
 
 /* Hover */
 .game-board.x .cell:not(.x):not(.o):hover::before,
-.game-board.x .cell:not(.x):not(.o):hover::after {
+.game-board.x .cell:not(.x):not(.o):hover::after,
+.game-board.o .cell:not(.x):not(.o):hover::before {
     background-color: #dfdfdf;
 }
