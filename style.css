@@ -60,6 +60,7 @@ table {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
 }
 
 /*******  GAME CONTAINER ******s*/
@@ -93,7 +94,7 @@ table {
 .game-board.x .cell:not(.x):not(.o):hover::after {
     content: '';
     position: absolute;
-    width: calc(var(--mark-size) * .2);
+    width: calc(var(--mark-size) * .1);
     height: var(--mark-size);
     background-color: #000;
 }
@@ -159,7 +160,7 @@ table {
     position: absolute;
     width: calc(var(--cell-size) * 3);
     height: calc(var(--cell-size) * 4.5);
-
+    
     display: none;
     flex-direction: column;
     align-items: center;
@@ -172,6 +173,7 @@ table {
     background-color: #38bdf8;
     border-radius: 5%;
 
+    font-size: 1rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
